@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>XV años de Maira Alejandra Urrutia</title>
+<meta name="theme-color" content="#091A35">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blush:#EA98B1;
+    --wine:#AA0947;
+    --navy:#0A3873;
+    --midnight:#091A35;
+    --royal:#2E5AA9;
+    --cream:#FBF2EE;
+    --line-on-dark: rgba(251,242,238,.35);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;}
+  body{
+    font-family:'Work Sans',sans-serif;
+    color:var(--cream);
+    background:var(--midnight);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{font-family:'Playfair Display',serif;}
+  a{color:inherit;}
+  button{font-family:inherit;}
+
+  .stage{min-height:100dvh;min-height:100vh;display:flex;justify-content:center;background:var(--midnight);}
+  .frame{width:100%;max-width:480px;position:relative;}
+  @media (min-width:560px){
+    .stage{
+      align-items:center;padding:2.5rem 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(234,152,177,.18), transparent 55%),
+        radial-gradient(circle at 80% 80%, rgba(46,90,169,.22), transparent 55%),
+        var(--midnight);
+    }
+    .frame{
+      height:88vh;max-height:900px;border-radius:2.25rem;overflow:hidden;
+      box-shadow:0 30px 80px rgba(0,0,0,.55);border:1px solid rgba(251,242,238,.08);
+    }
+  }
+
+  .scroller{height:100dvh;height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none;}
+  @media (min-width:560px){ .scroller{height:100%;} }
+  .scroller::-webkit-scrollbar{display:none;}
+
+  .panel{
+    min-height:100dvh;min-height:100vh;scroll-snap-align:start;scroll-snap-stop:always;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+    padding:9vh 8% 7vh;position:relative;overflow:hidden;
+  }
+  @media (min-width:560px){ .panel{min-height:100%;} }
+
+  .eyebrow{font-size:.8rem;letter-spacing:.04em;color:var(--blush);margin:0 0 .6rem;position:relative;z-index:1;}
+  .divider{display:flex;align-items:center;gap:.85rem;width:min(220px,60%);margin:1.4rem auto;color:inherit;opacity:.6;}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:currentColor;}
+  .divider i{width:6px;height:6px;background:currentColor;transform:rotate(45deg);flex:none;}
+
+  p{line-height:1.65;font-size:1.02rem;max-width:34ch;margin:0 auto;position:relative;z-index:1;}
+  .lede{font-size:1.12rem;}
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .8s ease, transform .8s ease;position:relative;z-index:1;}
+  .reveal.is-visible{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none;} }
+
+  /* confetti (shared) */
+  .confetti{position:absolute;top:-8%;width:8px;height:14px;opacity:.85;z-index:0;}
+  @media (prefers-reduced-motion:no-preference){ .confetti{animation-name:confettiFall;animation-timing-function:linear;animation-iteration-count:infinite;} }
+  @keyframes confettiFall{
+    0%{transform:translateY(-10%) rotate(0deg);opacity:.9;}
+    100%{transform:translateY(120vh) rotate(360deg);opacity:.1;}
+  }
+
+  /* ---------- 1. hero ---------- */
+  #hero{background:var(--midnight);}
+  .seal{width:88px;height:88px;border-radius:50%;border:1px solid var(--line-on-dark);display:flex;align-items:center;justify-content:center;margin-bottom:1.8rem;position:relative;z-index:1;}
+  .seal svg{width:34px;height:34px;stroke:var(--blush);}
+  #hero h1{font-size:clamp(1.9rem,7vw,2.4rem);font-weight:600;margin:0 0 .5rem;}
+  #hero .lede{color:var(--line-on-dark);}
+  .scroll-cue{position:absolute;bottom:6vh;left:50%;transform:translateX(-50%);font-size:.78rem;color:var(--line-on-dark);letter-spacing:.03em;display:flex;flex-direction:column;align-items:center;gap:.4rem;z-index:1;}
+  .scroll-cue svg{width:14px;height:14px;stroke:var(--blush);animation:bob 1.8s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+  @media (prefers-reduced-motion:reduce){.scroll-cue svg{animation:none;}}
+
+  /* ---------- 2. build-up ---------- */
+  #build{background:linear-gradient(160deg,var(--wine),#8a0839);}
+  #build h2{font-size:clamp(1.5rem,6vw,1.9rem);font-weight:500;font-style:italic;line-height:1.35;}
+
+  /* ---------- 3. reveal ---------- */
+  #reveal{background:radial-gradient(circle at 50% 30%, #10254a, var(--midnight));}
+  #reveal .eyebrow{color:var(--royal);}
+  #reveal h2{font-size:clamp(2.4rem,11vw,3.2rem);font-weight:700;letter-spacing:.01em;margin:.2rem 0 0;line-height:1.05;}
+  #reveal .sub{font-style:italic;font-weight:500;color:var(--blush);font-size:clamp(1.05rem,4.2vw,1.25rem);margin-top:.25rem;}
+  .tag{display:inline-block;margin-top:1.1rem;padding:.4rem 1rem;border-radius:99px;background:var(--blush);color:var(--midnight);font-size:.82rem;font-weight:500;position:relative;z-index:1;}
+  .spark{position:absolute;width:6px;height:6px;background:var(--blush);opacity:.55;transform:rotate(45deg);border-radius:1px;z-index:0;}
+  @media (prefers-reduced-motion:no-preference){ #reveal.is-active .spark{animation:pop 1.5s ease-out forwards;} }
+  @keyframes pop{
+    0%{transform:scale(0) rotate(0deg);opacity:0;}
+    45%{transform:scale(1) rotate(120deg);opacity:1;}
+    100%{transform:scale(.4) rotate(200deg);opacity:0;}
+  }
+
+  /* ---------- 4. invite copy ---------- */
+  #invite{background:var(--cream);color:var(--midnight);}
+  #invite .divider{color:var(--wine);}
+  #invite p{color:#2c2230;}
+  #invite .signoff{margin-top:1.6rem;font-style:italic;font-family:'Playfair Display',serif;color:var(--wine);}
+
+  /* ---------- 5. details ---------- */
+  #details{background:var(--navy);}
+  .card{width:100%;border:1px solid var(--line-on-dark);border-radius:.9rem;padding:1.6rem 1.4rem;text-align:left;position:relative;z-index:1;}
+  .detail-row{display:flex;gap:.9rem;align-items:flex-start;padding:.65rem 0;}
+  .detail-row+.detail-row{border-top:1px solid rgba(251,242,238,.14);}
+  .detail-row svg{width:19px;height:19px;stroke:var(--blush);flex:none;margin-top:.15rem;}
+  .detail-row strong{display:block;font-size:.72rem;letter-spacing:.03em;color:var(--blush);margin-bottom:.15rem;}
+  .detail-row span{font-size:.98rem;}
+  .cal-actions{display:flex;gap:.6rem;margin-top:1.2rem;}
+  .btn{flex:1;border:none;border-radius:.6rem;padding:.75rem .9rem;font-size:.85rem;font-weight:500;cursor:pointer;text-decoration:none;text-align:center;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;}
+  .btn-primary{background:var(--blush);color:var(--midnight);}
+  .btn-ghost{background:transparent;color:var(--cream);border:1px solid var(--line-on-dark);}
+  .btn:focus-visible{outline:2px solid var(--royal);outline-offset:2px;}
+  .fineprint{font-size:.76rem;color:var(--line-on-dark);margin-top:.9rem;text-align:left;}
+
+  /* ---------- 6. gesto libre (regalo / cartica) ---------- */
+  #gesto{background:linear-gradient(165deg,var(--blush),var(--cream));color:var(--midnight);}
+  #gesto p{color:#3a2a33;}
+  .gesto-options{display:flex;gap:1.6rem;justify-content:center;align-items:flex-start;margin-top:1.6rem;position:relative;z-index:1;}
+  .gesto-item{display:flex;flex-direction:column;align-items:center;gap:.5rem;width:90px;}
+  .mini-seal{width:52px;height:52px;border-radius:50%;border:1px solid rgba(9,26,53,.3);display:flex;align-items:center;justify-content:center;}
+  .mini-seal svg{width:22px;height:22px;stroke:var(--wine);}
+  .gesto-item span{font-size:.78rem;color:#3a2a33;}
+  .gesto-or{align-self:center;font-style:italic;color:#8a5f6b;font-size:.85rem;padding-top:1.2rem;}
+
+  /* ---------- 7. rsvp ---------- */
+  #rsvp{background:linear-gradient(160deg,var(--royal),var(--navy));}
+  #rsvp h2{font-size:clamp(1.6rem,6.5vw,2rem);font-weight:600;}
+  .rsvp-btn{
+    margin-top:1.4rem;background:var(--cream);color:var(--navy);border:none;border-radius:99px;
+    padding:.95rem 1.6rem;font-size:.98rem;font-weight:600;cursor:pointer;text-decoration:none;
+    display:inline-flex;align-items:center;gap:.55rem;position:relative;z-index:1;
+  }
+  .rsvp-btn svg{width:18px;height:18px;stroke:var(--navy);}
+  .rsvp-btn:focus-visible{outline:2px solid var(--blush);outline-offset:3px;}
+
+  /* ---------- 8. closing ---------- */
+  #closing{background:var(--midnight);}
+  .monogram{width:64px;height:64px;border-radius:50%;border:1px solid var(--line-on-dark);display:flex;align-items:center;justify-content:center;margin-bottom:1.3rem;font-family:'Playfair Display',serif;font-style:italic;font-size:1.5rem;color:var(--blush);position:relative;z-index:1;}
+  #closing h2{font-size:clamp(1.3rem,5.5vw,1.6rem);font-weight:500;font-style:italic;}
+  #closing .meta{color:var(--line-on-dark);font-size:.85rem;margin-top:1.1rem;}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="frame">
+    <main class="scroller" id="scroller">
+
+      <!-- 1. HERO -->
+      <section class="panel" id="hero">
+        <div class="seal">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.3"><path d="M3 6h18v13H3z"/><path d="M3 6l9 7 9-7"/></svg>
+        </div>
+        <h1 class="reveal is-visible">Tienes una invitación muy especial</h1>
+        <p class="lede reveal is-visible">Solo se la damos a los más cercanos.</p>
+        <div class="scroll-cue">
+          desliza
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+      </section>
+
+      <!-- 2. BUILD UP -->
+      <section class="panel" id="build">
+        <p class="eyebrow reveal">Estamos preparando algo hermoso</p>
+        <h2 class="reveal">Queremos hacerle una sorpresa a Maira,<br>y no podemos lograrlo sin ti</h2>
+      </section>
+
+      <!-- 3. REVEAL -->
+      <section class="panel" id="reveal">
+        <p class="eyebrow reveal">Sus quince años</p>
+        <h2 class="reveal">MAIRA</h2>
+        <p class="sub reveal">Alejandra Urrutia</p>
+        <p class="tag reveal">¡Es sorpresa!</p>
+      </section>
+
+      <!-- 4. INVITATION COPY -->
+      <section class="panel" id="invite">
+        <p class="eyebrow" style="color:var(--wine)">La invitación</p>
+        <div class="divider"><i></i></div>
+        <p class="lede reveal">
+          Queremos invitarte a celebrar junto a nosotros esta noche tan
+          especial para Maira. Tu presencia hará que todo sea aún más
+          bonito — solo te pedimos un favor: ¡ni una palabra! Que ella
+          no se entere de nada.
+        </p>
+        <p class="signoff reveal">Con cariño, familia y amigos de Maira</p>
+      </section>
+
+      <!-- 5. DETAILS -->
+      <section class="panel" id="details" style="align-items:stretch;">
+        <p class="eyebrow" style="text-align:center;position:relative;z-index:1;">Detalles del gran día</p>
+        <div class="card reveal">
+          <div class="detail-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+            <div><strong>Fecha</strong><span id="dateLabel">Sábado 5 de septiembre de 2026</span></div>
+          </div>
+          <div class="detail-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+            <div><strong>Hora</strong><span id="timeLabel">7:30 PM</span></div>
+          </div>
+          <div class="detail-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+            <div><strong>Lugar</strong><span id="placeLabel">Rey Burger</span><br><span id="addressLabel" style="color:var(--line-on-dark);font-size:.85rem;">Sede San Antonio, Cali</span></div>
+          </div>
+          <div class="cal-actions">
+            <a class="btn btn-primary" id="menuBtn" href="#" target="_blank" rel="noopener">Ver el menú</a>
+            <a class="btn btn-ghost" id="mapsBtn" href="#" target="_blank" rel="noopener">Cómo llegar</a>
+           <!-- </div>
+           <p class="fineprint">* Confirmaremos la hora exacta pronto.</p>
+        </div> -->
+      </section>
+
+      <!-- 6. GESTO LIBRE -->
+      <section class="panel" id="gesto">
+        <p class="eyebrow" style="color:var(--wine)">Si quieres traer algo</p>
+        <h2 class="reveal" style="font-size:clamp(1.6rem,6.5vw,2rem);font-weight:600;">Queda totalmente libre</h2>
+        <p class="reveal">
+          Si quieres llevarle un regalo o un sobre, lo va a recibir con
+          mucho cariño — pero no es obligatorio.
+        </p>
+        <div class="gesto-options">
+          <div class="gesto-item">
+            <div class="mini-seal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 8h18M12 8v13M7.5 8a2.5 2.5 0 0 1 0-5c2 0 3.5 2 4.5 3.5C13 5 14.5 3 16.5 3a2.5 2.5 0 0 1 0 5"/></svg></div>
+            <span>Un regalo o sobre</span>
+          </div>
+          <div class="gesto-or">o</div>
+          <div class="gesto-item">
+            <div class="mini-seal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M4 20l6-1.5L19 9a2.5 2.5 0 0 0-3.5-3.5L6 15l-2 5z"/></svg></div>
+            <span>Una cartica escrita</span>
+          </div>
+        </div>
+        <p class="reveal" style="margin-top:1.2rem;font-size:.92rem;">
+          Si eliges escribirle unas palabras, tráela contigo esa noche —
+          ella la va a atesorar.
+        </p>
+      </section>
+
+      <!-- 7. RSVP -->
+      <section class="panel" id="rsvp">
+        <p class="eyebrow">Antes de irte</p>
+        <h2 class="reveal">Confirma tu asistencia</h2>
+        <p class="reveal" style="color:rgba(251,242,238,.9);">
+          Cuéntanos si nos acompañas, así podemos organizar todo mejor
+          para ese día.
+        </p>
+        <a class="rsvp-btn" id="rsvpBtn" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Confirmar por WhatsApp
+        </a>
+      </section>
+
+      <!-- 8. CLOSING -->
+      <section class="panel" id="closing">
+        <div class="monogram">M</div>
+        <h2 class="reveal">Gracias por hacer parte<br>del secreto 🤫</h2>
+        <p class="meta">Sábado 5 de septiembre de 2026 · Rey Burger, San Antonio</p>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+(function(){
+  const EVENT = {
+    dateLabel: "Sábado 5 de septiembre de 2026",
+    timeLabel: "Por confirmar",
+    placeName: "Rey Burger",
+    address: "Sede San Antonio, Cali",
+    menuUrl: "https://www.instagram.com/stories/highlights/17878309963829742/?hl=es",
+    mapsQuery: "Rey Burger San Antonio, Cali",
+    whatsappNumber: "573178338034",
+    whatsappMessage: "¡Hola! Confirmo mi asistencia a la fiesta sorpresa de Maira 🎉"
+  };
+
+  document.getElementById('dateLabel').textContent = EVENT.dateLabel;
+  document.getElementById('timeLabel').textContent = EVENT.timeLabel;
+  document.getElementById('placeLabel').textContent = EVENT.placeName;
+  document.getElementById('addressLabel').textContent = EVENT.address;
+  document.getElementById('menuBtn').href = EVENT.menuUrl;
+  document.getElementById('mapsBtn').href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(EVENT.mapsQuery);
+  document.getElementById('rsvpBtn').href = 'https://wa.me/' + EVENT.whatsappNumber + '?text=' + encodeURIComponent(EVENT.whatsappMessage);
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal:not(.is-visible)');
+  const revealObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:.35});
+  revealEls.forEach(el=>revealObserver.observe(el));
+
+  // sparkle burst on the name reveal, once
+  const revealPanel = document.getElementById('reveal');
+  for(let i=0;i<10;i++){
+    const s = document.createElement('span');
+    s.className = 'spark';
+    s.style.left = (10 + Math.random()*80) + '%';
+    s.style.top = (12 + Math.random()*65) + '%';
+    s.style.animationDelay = (Math.random()*0.6) + 's';
+    revealPanel.appendChild(s);
+  }
+  const sparkObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        revealPanel.classList.add('is-active');
+        sparkObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:.5});
+  sparkObserver.observe(revealPanel);
+
+  // confetti
+  function spawnConfetti(containerId, count, colors, minDur, durRange){
+    const container = document.getElementById(containerId);
+    if(!container) return;
+    for(let i=0;i<count;i++){
+      const el = document.createElement('span');
+      el.className = 'confetti';
+      el.style.left = (Math.random()*100) + '%';
+      el.style.background = colors[Math.floor(Math.random()*colors.length)];
+      const dur = minDur + Math.random()*durRange;
+      el.style.animationDuration = dur + 's';
+      el.style.animationDelay = (Math.random()*dur) + 's';
+      if(Math.random() > 0.5){ el.style.width = '7px'; el.style.height = '7px'; el.style.borderRadius = '50%'; }
+      container.appendChild(el);
+    }
+  }
+  spawnConfetti('build', 7, ['#FBF2EE','#EA98B1'], 6, 3);
+  spawnConfetti('reveal', 16, ['#EA98B1','#2E5AA9','#FBF2EE'], 4, 4);
+  spawnConfetti('rsvp', 10, ['#FBF2EE','#EA98B1','#AA0947'], 5, 3);
+})();
+</script>
+</body>
+</html>
